@@ -1,0 +1,50 @@
+Receive technology problem request Task Specification
+
+## Basic Information
+
+- **Task ID:** T1
+- **Task name:** Receive technology problem request
+- **Task type:** Act
+- **Task owner:** IT Support System
+
+## 1. Task Description
+
+The system receives an employee technology problem request through the approved support form, it then creates a unique request Id, adn records the request processing. The request must contain an issue desctiption and an employee contact method. The system does not request, store, or share passwords, MFA cosed, security answers, or unnecessary personal information.
+## 2. Inputs
+
+### Input 1
+
+- **Input name:** Technology problem request
+- **Contents and format:** Structured form record containing the employee contact method, issue description, and submission time.
+- **Source:** Employee
+
+## 3. Outputs
+
+### Output 1
+
+- **Output name:** Logged support request
+- **Contents and format:** Structured request record containing a unique request ID, employee contact method, issue description, submission time, and status received
+- **Next task or recipient:** T2 Gather problem information
+- **Complete when:** A request ID has been created nd the request record has been saved
+
+
+## 4. Planned Tools
+
+
+### Tool 1
+
+- **Tool name:** receive_problem_request
+- **Input:** Technology problem request
+- **Output:** Logged support request
+- **Implementation Route:** Web API calls and database queries
+- **Integration approach:** Direct integration
+- **Role in this task:** Receives the submittied form, validates required fields, creates a request ID, and stores the request record.
+- **Task timeout:** 30 seconds
+- **Maximum retries:** 2
+- **Retry only when:** A temporary form submission or database error occurs. The request ID prevents duplicate records on a retry
+- **On timeout, exhausted retries, or an error that cannot be retried:** Record a failed submission status and notify the IT Support Team manual intake
+
+*Copy the Tool block as needed. For a fully manual task, you may still need to retrieve the information and hand it to human and allow updates from human, depending on your manual task context.*
+
+
+
