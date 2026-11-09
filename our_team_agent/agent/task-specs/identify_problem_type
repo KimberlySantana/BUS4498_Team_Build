@@ -1,0 +1,51 @@
+# Identify problem type Task Specification
+
+## Basic Information
+
+- **Task ID:** T4
+- **Task name:** Identify problem type
+- **Task type:** Decide
+- **Task owner:** IT Support System
+
+## 1. Task Description
+
+The system applies approved routing rules to classify the problem as account acces, network or connectivity, hardware, software or application, email or collaboation, or security incident. It also create an urgency flag and a supported status flag.
+An ussue is ugent when it involves a supsected security incident, an account lokout affecting many users, a whole team or department offline, or a major system outage. A requesr is supported only when it matches an apporved IT knowledge base categoy. Unclear, unsupported, or classification failure cases are sent to IT staff.
+
+## 2. Inputs
+
+### Input 1
+
+- **Input name:** Problem informationr record
+- **Contents and format:** Structured record containing the request ID, problem description, available technicial details, impact scopre, and missing information status.
+- **Source:** T2 Gather problem infromation or T3 Ask for missing information
+- **If a required input is missing or invalid:** [State what happens and identify the exception task or responsible person.]
+
+## 3. Outputs
+
+### Output 1
+
+- **Output name:** Problem classification
+- **Contents and format:** Structured record containing the request ID, problem type, urgency flag, supported status flage, and routing result
+- **Next task or recipient:** Urgent, unsupported, unclear, or failed classifications go to T7 Gather necessary information. Supported non urgent classifications go to T5 Provide approved resolving steps.
+- **Complete when:** The problem type, urgency flag, supported status flag, and routing result are saved
+
+## 4. Planned Tools
+
+### Tool 1
+
+- **Tool name:** identify_problem_type
+- **Input:** Problem information record
+- **Output:** Problem classification
+- **Implementation Route:** Functions/scripts and database queries
+- **Integration approach:** Direct integration
+- **Role in this task:** Applies the approved category, urgenct, and support rules to create the classification record.
+- **Task timeout:** 30 seconds
+- **Maximum retries:** 2
+- **Retry only when:** A temporary system or rule service error occurs. Retries update the existing classification using the same request ID
+- **On timeout, exhausted retries, or an error that cannot be retried:** Record the classification failure and send the request to T7 Gather necessary information.
+
+*Copy the Tool block as needed. For a fully manual task, you may still need to retrieve the information and hand it to human and allow updates from human, depending on your manual task context.*
+
+
+
