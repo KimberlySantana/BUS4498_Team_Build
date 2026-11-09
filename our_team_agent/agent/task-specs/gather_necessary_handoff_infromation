@@ -1,0 +1,45 @@
+# Gather necessary handoff information Task Specification
+
+## Basic Information
+
+- **Task ID:** T7
+- **Task name:** Gather necessary handoff information
+- **Task type:** Retrieve
+- **Task owner:** IT Support System
+
+## 1. Task Description
+
+The system prepares the information IT staff need to review an escalated request. It compiles the request ID, problem summary, problem type, urgency flag, device or service details, error details, troubleshooting already attempted, adn reason for escalation. Passords, MFA codes, secutiry answers, and unnecessary personal infromation are excluded.
+
+## 2. Inputs
+
+### Input 1
+
+- **Input name:** Escalated request record
+- **Contents and format:** Structrued request record containing the request ID, reported issue, available problem information, classification, and escalation reason.
+- **Source:** T3 Asking for missing information, T4 Identify problem typem T5 Provide approved resolving steps, or T6 Ask employee if problem was resolved
+- **If a required input is missing or invalid:** Mark missing fields in the handoff package and send the available infromation to IT staff rather than asking for confidential information.
+
+## 3. Outputs
+
+### Output 1
+
+- **Output name:** IT handoff package
+- **Contents and format:** Structured record containing the request ID, employee contact method, problem summary, clasifiction, urgenct, technical details, steps attempted, escalation reason, and missing field status.
+- **Next task or recipient:** T8 Send problem and necessary information to IT staff for review.
+- **Complete when:** The handoff package is created and containg all available non confidentail information.
+
+## 4. Planned Tools
+
+### Tool 1
+
+- **Tool name:** gather_necessary_handof_information
+- **Input:** Escalated request record
+- **Output:** IT handoff package
+- **Implementation Route:** Functions/scripts and database queries
+- **Integration approach:** Direct integration
+- **Role in this task:** Combines available case details into one IT ready handoff package and excludes confidential infromation
+- **Task timeout:** 30 seconds
+- **Maximum retries:** 2
+- **Retry only when:** A temporyary database or package generation error occurs. Retries update the existing package using the request ID.
+- **On timeout, exhausted retries, or an error that cannot be retried:** Record the package generation failure and send the available case information to the IT Support Team
